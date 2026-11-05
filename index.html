@@ -33,7 +33,46 @@ button{background:#a16cff;color:white;border:0;padding:15px 22px;border-radius:1
 </section>
 </main>
 <script>
-async function generate(){
+async function generate() {
+  const idea = document.getElementById("idea").value.trim();
+  const status = document.getElementById("status");
+  const result = document.getElementById("result");
+
+  if (!idea) {
+    status.innerText = "Pehle apna anime idea likho.";
+    return;
+  }
+
+  status.innerText = "AI tumhari story bana raha hai...";
+  result.innerText = "";
+
+  try {
+    const response = await fetch("/api/generate", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idea })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Generation failed");
+    }
+
+    result.innerText =
+      "STORY:\\n" + data.story +
+      "\\n\\nVIDEO PROMPTS:\\n" +
+      (data.parts || []).map(p =>
+        "PART " + p.part + "\\n" + p.prompt
+      ).join("\\n\\n");
+
+    status.innerText = "Tumhari anime story ready hai!";
+
+  } catch (error) {
+    status.innerText = "Error: " + error.message;
+  }
+}
+</script>
 const idea=document.getElementById('idea').value.trim();
 if(!idea){document.getElementById('status').innerText='Pehle idea likho.';return;}
 document.getElementById('status').innerText='AI backend abhi connect karna baaki hai.';
