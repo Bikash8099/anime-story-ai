@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ANIME STORY AI</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090812;color:#fff;font-family:Arial,sans-serif;padding:20px}
+main{max-width:850px;margin:40px auto}
+header{color:#c19aff;font-weight:bold;letter-spacing:3px}
+small{color:#aaa}
+section{background:#171425;padding:25px;border:1px solid #39304e;border-radius:18px;margin-top:25px}
+h1{font-size:42px}
+textarea{width:100%;height:140px;background:#0b0a13;color:white;border:1px solid #51436e;border-radius:12px;padding:15px;font-size:16px}
+button{background:#a16cff;color:white;border:0;padding:15px 22px;border-radius:10px;font-weight:bold;margin-top:15px}
+#result{white-space:pre-wrap;line-height:1.7}
+</style>
+</head>
+<body>
+<main>
+<header>ANIME STORY AI</header>
+<small>YOUR PERSONAL ANIME STUDIO</small>
+<section>
+<p>YOUR IMAGINATION, IN MOTION</p>
+<h1>Create Your Anime Story</h1>
+<p>Apna idea likho. AI tumhari anime story banayega.</p>
+<textarea id="idea" placeholder="Anime sad scene, love story, action fight..."></textarea>
+<br>
+<button onclick="generate()">Generate Story ✦</button>
+<p id="status"></p>
+<div id="result"></div>
+</section>
+</main>
+<script>
+async function generate(){
+const idea=document.getElementById('idea').value.trim();
+if(!idea){document.getElementById('status').innerText='Pehle idea likho.';return;}
+document.getElementById('status').innerText='AI backend abhi connect karna baaki hai.';
+}
+</script>
+</body>
+</html>
